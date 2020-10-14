@@ -1,0 +1,2 @@
+# Twitter_Scrapter_Data_Analytics
+In this project we learned how to tackle writing code in python, in addition to putting our shell scripting abilities to the test. We chose to do this project because we noticed the recent escalation of tweets mentioning the COVID-19/CoronaVirus. Therefore, we wrote several independent programs/scripts that ultimately, facilitates the analysis of tweets pulled from twitter using an API.
