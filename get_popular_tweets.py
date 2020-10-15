@@ -54,7 +54,7 @@ def get_most_popular_twitter_tweets(query, result_type = 'popular'):
  
             dict_['user'].append(tweet['user']['screen_name'])
             dict_['date'].append(tweet['created_at'])
-            dict_['text'].append(tweet['text'])
+            dict_['text'].append(tweet['text'].replace('\n', ' '))
             dict_['favorite_count'].append(tweet['favorite_count'])
             dict_['retweet_count'].append(tweet['retweet_count'])
             hashtags = tweet['entities']['hashtags']
@@ -62,7 +62,7 @@ def get_most_popular_twitter_tweets(query, result_type = 'popular'):
                 hashtags = hashtag['text']
             dict_['hashtags'].append(hashtags)  
             
-            print(str(count) + ':', tweet['text'], '\n')
+            print(str(count) + ':', tweet['text'].replace('\n', ' '), '\n')
                 
     # Structure data in a pandas DataFrame for easier manipulation
     df = pd.DataFrame(dict_)
