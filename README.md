@@ -8,7 +8,7 @@ In this project we learned how to tackle writing code in python, in addition to 
 
 In order to scrape tweets from Twitter we utilized a Twitter API. We learned that an API (Application Programming Interface) is a collection of protocols and subroutines for building software. The twitter API gave me access to the tweets according to a series of search queries. We learned that the twitter API uses private key authentication to authenticate all endpoints. We wrote and implemented a python code (the one below) to retrieve all the tweets that may contain a certain word or hashtag specified by the user. The task is performed by calling the python file. The tweets are redirected to a csv file named accordingly to the users search query 'trending*' + query + '\_at*' + time.strftime('%Y-%m-%d-%H-%M') + '.csv' (for example: if I searched for the term coronavirus, the output file would be named trending_coronavirus_at_2020-10-14-15-56.csv) and placed within the same directory as the python file. For reference, you can view the [trending_coronavirus_at_2020-10-14-15-56.csv](trending_coronavirus_at_2020-10-14-15-56.csv) file in this repository.
 
-###### Instructions:
+### Instructions:
 
 1. This task is performed by calling:
    python get_popular_tweets.py
@@ -23,7 +23,7 @@ In order to scrape tweets from Twitter we utilized a Twitter API. We learned tha
 We created a tweet*stream.py file that collects all live tweets (excluding retweets) mentioning the search qurey inputed by the user.
 The script also outputs a csv file to the same directory called query + 'tweets' + '*' + time.strftime('%Y-%m-%d-%H-%M-%S') + '.csv' (for example: if I searched for the term covid, the output file would be named covidtweets_2020-10-15-14-01-37.csv). For reference, you can view the [covidtweets_2020-10-15-14-01-37.csv](covidtweets_2020-10-15-14-01-37.csv) file in this repository.
 
-###### Instructions:
+### Instructions:
 
 1. This task is performed by calling:
    python tweet_stream.py
@@ -32,15 +32,19 @@ The script also outputs a csv file to the same directory called query + 'tweets'
 2. The tweet stream are also being sent to an output csv file that is created in the same directory and looks as follows:
    ![example of tweet_stream.py output csv file](./images/tweet_stream_output_ex_img.png)
 
-## Part C:
+## Part C: Analysis of tweets
 
-This part features a script in shell that asks the user for five different words of his/her choice and displays a bar chart of how many tweets in the corona.txt document contain each of those words.
-Instructions:
+This part features a script in shell that asks the user for five different words of his/her choice and displays a bar chart of how many tweets in the output file of tweet_stream.py (for this example we use the [covidtweets_2020-10-15-14-01-37.csv](covidtweets_2020-10-15-14-01-37.csv)) contain each of those words.
 
-###### Instructions:
+### Instructions:
 
-1.The shell script is named tweets4.py. Run this script from terminal.
-It prompts the user for the text file the user wants the code to read. For the case of this submission, enter ‘corona.txt’(without quotations). 2. The shell script then prompts the user to enter five words (with spaces but no enter) that the user would like to check the frequency of (frequency of how many tweets in the text file contain the word). 3. The shell script then runs a python program called bargraphing2.py; this program uses the matplotlib library to create the bar chart. 4. If at any time you would like to exit, press ctrl C.
+1. The shell script is named tweet_analysis.sh. Run this script from terminal by the prompt: bash tweet_analysis.sh
+2. It prompts the user for the text file the user wants the code to read. For example, enter ‘covidtweets_2020-10-15-14-01-37.csv’(without quotations).
+3. The shell script then prompts the user to enter five words that the user would like to check the frequency of (how many tweets in the file contain the word).
+   ![example of bargraphing.py outputs](./images/tweet_analysis_commannd_prompts)
+4. The shell script then runs a python program called bargraphing.py; this program uses the matplotlib library to create the bar chart. The output should look like:
+   ![example of bargraphing.py outputs](./images/sample_bargraph.png)
+5. If at any time you would like to exit, press ctrl C.
 
 ## Installaion
 
@@ -73,7 +77,8 @@ Click on “Keys and Access Tokens”
 In this page, you’ll find a consumer_key, consumer_secret, access_token, and access_token_secret
 Copy your keys and tokens into the placeholders on config.cfg
 
-##Execution
+## Execution
+
 You should be able to execute the following commands from your command line (make sure you are in the directory contianing the downloaded files):
 python get_popular_tweets.py
 python tweet_stream.py
