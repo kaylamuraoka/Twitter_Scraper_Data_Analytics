@@ -8,6 +8,7 @@ import csv
 
 # prompt the user for a word
 query = input('What word/hashtag should we search for? (Enter a single word): ').strip()
+max_num = int(input('How many tweets do you want to collect: '))
 
 # check that the user input is a valid string
 try:
@@ -24,6 +25,7 @@ class MyStreamListener(tweepy.StreamListener):
     def __init__(self):
         super().__init__()
         self.itera = 0
+        self.max = max_num
         # Create a file with user's input and  and the current time to save the tweets to
         self.filename = query + 'tweets' + '_' + time.strftime('%Y-%m-%d-%H-%M-%S') + '.csv'
         # Create a new file with that filename
@@ -31,14 +33,12 @@ class MyStreamListener(tweepy.StreamListener):
         # Create a csv writer
         writer = csv.writer(csvFile)
         # Write a single row with the headers of the columns
-        writer.writerow(['num',
-                        'text',
+        writer.writerow(['text',
                         'hashtags',
                         'date',
                         'user',
                         'users number of followers',
-                        'location'
-                        ])
+                        'location'])
 
     # when tweet appears
     def on_status(self, status):
@@ -54,31 +54,35 @@ class MyStreamListener(tweepy.StreamListener):
         else:
             text = status.text.replace('\n', ' ') + '\n'
         
-        hashtags = []   #make an empty list
-        for hashtag in status.entities['hashtags']:    #iterate over the list
-            hashtags.append(hashtag["text"])     #append each hashtag to 'hashtags'
+        hashtags = []   #　make an empty list
+        for hashtag in status.entities['hashtags']:    #　iterate over the list
+            hashtags.append(hashtag["text"])        #　append each hashtag to 'hashtags'
 
         # If the tweet is not a retweet
         if not 'RT @' in status.text:
             try:
-                # Write the tweet's information to the csv file
-                writer.writerow([self.itera,
-                                text,
+                self.itera += 1
+                if self.itera <= int(max_num):
+                    # Write the tweet's information to the csv file
+                    writer.writerow([text,
                                 hashtags,
                                 status.created_at,
                                 status.user.screen_name,
                                 status.user.followers_count,
                                 status.user.location])
-        
+                    
+                    # print something after every 100th iterable element
+                    if self.itera % 100 == 0:
+                        print("We collected " + str(self.itera) + " tweets\n")    
+                    
+                else:
+                    myStream.disconnect
+                    csvFile.close()
+                    sys.exit()
+
             except Exception as e:
                 print(e)
                 pass
-
-        self.itera += 1
-        if self.itera % 100 == 0:
-            csvFile.close()
-            # Return nothing
-            return
     
     # When an error occurs
     def on_error(self, status_code):
@@ -92,9 +96,8 @@ class MyStreamListener(tweepy.StreamListener):
         
 
 if __name__ == "__main__":
-    start_run = time.time()
-    print("Writing tweets to: " + query + 'tweets' + '_' + time.strftime('%Y-%m-%d-%H-%M-%S') + '.csv')
-    print("Press CTRL + c to terminate...")
+    print("Writing tweets to: " + query + 'tweets' + '_' + time.strftime('%Y-%m-%d-%H-%M-%S') + '.csv\n')
+    print("Press CTRL + c to terminate...\n")
     time.sleep(2)
 
     config = ConfigParser()
