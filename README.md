@@ -83,3 +83,7 @@ You should be able to execute the following commands from your command line (mak
 python get_popular_tweets.py
 python tweet_stream.py
 bash tweet_analysis.sh
+
+## License
+
+This project is licensed under [**GNU GPL v3**](https://choosealicense.com/licenses/gpl-3.0/).
