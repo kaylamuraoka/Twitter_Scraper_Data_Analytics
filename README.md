@@ -41,7 +41,7 @@ This part features a script in shell that asks the user for five different words
 1. The shell script is named tweet_analysis.sh. Run this script from terminal by the prompt: bash tweet_analysis.sh
 2. It prompts the user for the text file the user wants the code to read. For example, enter ‘covidtweets_2020-10-15-14-01-37.csv’(without quotations).
 3. The shell script then prompts the user to enter five words that the user would like to check the frequency of (how many tweets in the file contain the word).
-   ![example of bargraphing.py outputs](./images/tweet_analysis_commannd_prompts)
+   ![example of bargraphing.py outputs](./images/tweet_analysis_commannd_prompts.png)
 4. The shell script then runs a python program called bargraphing.py; this program uses the matplotlib library to create the bar chart. The output should look like:
    ![example of bargraphing.py outputs](./images/sample_bargraph.png)
 5. If at any time you would like to exit, press ctrl C.
